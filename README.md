@@ -2,6 +2,7 @@
 
 This is my study notes for Golang. It is a quick intro/guide to start with golang if you have prior programming experience.
 
+## Table of content
 - [🏓Go Fundmentals](#--go-fundmentals)
   * [Notes](#notes)
   * [Variables Declaration](#variables-declaration)
@@ -316,6 +317,10 @@ func wrapper() func() int {
 }
 ```  
       
+      
+--------------------------------------------------------------------------
+      
+            
 
 # ✨Go functions and return types.
 
@@ -515,6 +520,12 @@ fmt.Println(x)
 fmt.Println(x.Person.FullName()) //Sherif Abdel-Naby
 fmt.Println(x.FullName()) 		   //0ID12000ID Sherif Abdel-Naby
 ```
+
+
+--------------------------------------------------------------------------
+
+
+
 # 🏗Go Data-Structures
 
 Arrays, Slices, Maps, and Structs
@@ -680,6 +691,12 @@ fmt.Println("key not found (gets zero value):", m["notFoundKey"])
 n := map[string]int{"foo": 1, "bar": 2}
 fmt.Println("map:", n)
 ```
+
+
+--------------------------------------------------------------------------
+
+
+
 # 🏢Go Structs / OOP
 
 ## Notes
@@ -849,6 +866,12 @@ func main() {
     fmt.Println(x.Person.FullName()) //Sherif Abdel-Naby
     fmt.Println(x.FullName()) 		 //0ID12000ID Sherif Abdel-Naby
 ```
+
+
+--------------------------------------------------------------------------
+
+
+
 # 🥂Go Concurrency
 
 ## Intro
@@ -1095,6 +1118,12 @@ Output:
     Summation Finished -> Outputing SUM
     Final Sum 15
 ```
+
+
+--------------------------------------------------------------------------
+
+
+
 # 🐞Go Error Handling
 
 ## Notes
