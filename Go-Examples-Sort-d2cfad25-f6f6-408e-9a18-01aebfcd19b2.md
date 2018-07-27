@@ -1,2 +1,0 @@
-# Go Examples - Sort
-
