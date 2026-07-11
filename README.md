@@ -2,80 +2,82 @@
 
 This is my study notes for Golang. It is a quick intro/guide to start with golang if you have prior programming experience.
 
-## Table of content
-- [🏓Go Fundmentals](#--go-fundmentals)
-  * [Notes](#notes)
-  * [Variables Declaration](#variables-declaration)
-  * [Go Primitive Types](#go-primitive-types)
-  * [Visibility](#visibility)
-  * [Take Input from console](#take-input-from-console)
-  * [Iota](#iota)
-  * [Go Pointers](#go-pointers)
-  * [Go If-Conditions](#go-if-conditions)
-  * [Go For-Loops](#go-for-loops)
-  * [Go For-Each loop](#go-for-each-loop)
-  * [Go Switch Statement](#go-switch-statement)
-  * [Type Function and Returning Functions](#type-function-and-returning-functions)
-- [✨Go functions and return types.](#-go-functions-and-return-types)
-  * [Notes](#notes-1)
-  * [Typical Function](#typical-function)
-  * [Multiple Returns](#multiple-returns)
-  * [Named Returns](#named-returns)
-  * [Variadic Functions / Variable arguments list](#variadic-functions---variable-arguments-list)
-  * [Type Function and Returning Functions](#type-function-and-returning-functions-1)
-  * [Callbacks - Passing functions as argument](#callbacks---passing-functions-as-argument)
-  * [Defer Keyword](#defer-keyword)
-  * [Receivers](#receivers)
-  * [Overriding Receivers](#overriding-receivers)
-- [🏗Go Data-Structures](#--go-data-structures)
-  * [Arrays](#arrays)
-  * [Slices](#slices)
-  * [Iterating over a Slice](#iterating-over-a-slice)
-  * [Appending to Slice](#appending-to-slice)
-  * [Common Slice Functions](#common-slice-functions)
-  * [Slices Tricks](#slices-tricks)
-  * [Maps](#maps)
-- [🏢Go Structs / OOP](#--go-structs---oop)
-  * [Notes](#notes-2)
-  * [Go supports](#go-supports)
-    + [Encapsulation](#encapsulation)
-    + [Inheritance and Reusability](#inheritance-and-reusability)
-    + [Polymorphism and Interfaces](#polymorphism-and-interfaces)
-    + [Overriding](#overriding)
-- [🥂Go Concurrency](#--go-concurrency)
-  * [Intro](#intro)
-  * [Notes](#notes-3)
-  * [mutex Locks, WaitGroups, and Atomic operations](#mutex-locks--waitgroups--and-atomic-operations)
-  * [Go Channels](#go-channels)
-    + [Example 1](#example-1)
-    + [Example 2](#example-2)
-    + [Example 3](#example-3)
-    + [Example 4](#example-4)
-    + [Example 5 - Semaphores](#example-5---semaphores)
-    + [Example 6 - Using channels as arguments/returns](#example-6---using-channels-as-arguments-returns)
-- [🐞Go Error Handling](#--go-error-handling)
-  * [Notes](#notes-4)
-  * [Example](#example)
+For local toolchain setup (mise, linters, git hooks), see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Table of content
+
+- [🏓Go Fundamentals](#-go-fundamentals)
+  - [Notes](#notes)
+  - [Variables Declaration](#variables-declaration)
+  - [Go Primitive Types](#go-primitive-types)
+  - [Visibility](#visibility)
+  - [Take Input from console](#take-input-from-console)
+  - [Iota](#iota)
+  - [Go Pointers](#go-pointers)
+  - [Go If-Conditions](#go-if-conditions)
+  - [Go For-Loops](#go-for-loops)
+  - [Go For-Each loop](#go-for-each-loop)
+  - [Go Switch Statement](#go-switch-statement)
+  - [Type Function and Returning Functions](#type-function-and-returning-functions)
+- [✨Go functions and return types.](#go-functions-and-return-types)
+  - [Notes](#notes-1)
+  - [Typical Function](#typical-function)
+  - [Multiple Returns](#multiple-returns)
+  - [Named Returns](#named-returns)
+  - [Variadic Functions / Variable arguments list](#variadic-functions--variable-arguments-list)
+  - [Type Function and Returning Functions](#type-function-and-returning-functions-1)
+  - [Callbacks - Passing functions as argument](#callbacks---passing-functions-as-argument)
+  - [Defer Keyword](#defer-keyword)
+  - [Receivers](#receivers)
+  - [Overriding Receivers](#overriding-receivers)
+- [🏗Go Data-Structures](#-go-data-structures)
+  - [Arrays](#arrays)
+  - [Slices](#slices)
+  - [Iterating over a Slice](#iterating-over-a-slice)
+  - [Appending to Slice](#appending-to-slice)
+  - [Common Slice Functions](#common-slice-functions)
+  - [Slices Tricks](#slices-tricks)
+  - [Maps](#maps)
+- [🏢Go Structs / OOP](#-go-structs--oop)
+  - [Notes](#notes-2)
+  - [Go supports](#go-supports)
+    - [Encapsulation](#encapsulation)
+    - [Inheritance and Reusability](#inheritance-and-reusability)
+    - [Polymorphism and Interfaces](#polymorphism-and-interfaces)
+    - [Overriding](#overriding)
+- [🥂Go Concurrency](#-go-concurrency)
+  - [Intro](#intro)
+  - [Notes](#notes-3)
+  - [mutex Locks, WaitGroups, and Atomic operations](#mutex-locks-waitgroups-and-atomic-operations)
+  - [Go Channels](#go-channels)
+    - [Example 1](#example-1)
+    - [Example 2](#example-2)
+    - [Example 3](#example-3)
+    - [Example 4](#example-4)
+    - [Example 5 - Semaphores](#example-5---semaphores)
+    - [Example 6 - Using channels as arguments/returns](#example-6---using-channels-as-argumentsreturns)
+- [🐞Go Error Handling](#-go-error-handling)
+  - [Notes](#notes-4)
+  - [Example](#example)
 
 --------------------------------------------------------------------------
 
-
-# 🏓Go Fundmentals
+# 🏓Go Fundamentals
 
 ## Notes
 
-1. Program Excuetable is at `package main/func main()`
+1. Program Executable is at `package main/func main()`
+
 ``` Go
 
-        package main        //Excuetables must be of package main
+        package main        //Executables must be of package main
         import "fmt"
-        
+
         func main() {
         	var g string = "Hello golang"
         	println(g)
         }
-        
+
         func function() string {
         	return "Five of Diamonds"
         }
@@ -83,29 +85,29 @@ This is my study notes for Golang. It is a quick intro/guide to start with golan
 
 2. **Blank Identifier**: Use `_` to replace unused variables.
 3. there are two primitive ways to allocate to a pointer, `new()` and `make()`, they differ though, we will discuss that later, briefly new returns pointer, make return value. read [Doc](https://golang.org/doc/effective_go.html#allocation_new).
-4. Every thing is `passed by value` except **arrays, slices, maps and channels** which some calls r**eference types**, these types are passed by reference ( they internally have pointers, so no copying of the actual data happens when passing them) . 
+4. Every thing is `passed by value` except **arrays, slices, maps and channels** which some calls **reference types**, these types are passed by reference ( they internally have pointers, so no copying of the actual data happens when passing them) .
 5. Unlike in C, it's perfectly OK to return the address of a local variable; the storage associated with the variable survives after the function returns.
 
 ## Variables Declaration
 
 ``` Go
 
-      //Declration
+      //Declaration
       var g string
-      
+
       //Assignment
       g = "golang"
-      
-      //Declration & Assignment
+
+      //Declaration & Assignment
       var g = "golang"
       var g string = "golang"
-      
-      //Shorthand - Declration & Assignmnet
+
+      //Shorthand - Declaration & Assignment
       a := 10
       b := "golang"
 ```
 
-*Uninitialized variables are given its zero value *(e.g int = 0, string = "", bool = false)* 
+*Uninitialized variables are given its zero value *(e.g int = 0, string = "", bool = false)*
 
 ## Go Primitive Types
 
@@ -152,7 +154,9 @@ func main() {
   println(myPkg.lowercaseFunc())
 }
 ```
+
 ## Take Input from console
+
 ``` Go
 //take input like cin >> in c++
 var x int = 1337
@@ -176,6 +180,7 @@ z = scanner.Text()
 
 fmt.Println("You Entered z:", z)
 ```
+
 ## Iota
 
 iota in Go, is a value used within the **const** block, its value starts at 0 per block, and increment each time it is used again
@@ -191,6 +196,7 @@ const (
 ## Go Pointers
 
 Pointers syntax is essentially like C/C++
+
 ``` Go
 var value int = 1000
 var pointer *int = &value
@@ -206,7 +212,8 @@ println(*pointer + *pointer)  //1011 + 1011 = 2022
 ## Go If-Conditions
 
 - Braces must open in the same line of the if/else ( Aghh 😕 )
-- in Go's if-statements **parentheses( )** around conditions **are optional**.  but the **braces { } are required** even for oneliners.
+- in Go's if-statements **parentheses( )** around conditions **are optional**. but the **braces { } are required** even for oneliners.
+
 ``` Go
   value := 10
   if value < 10 {
@@ -217,8 +224,8 @@ println(*pointer + *pointer)  //1011 + 1011 = 2022
     println("Equals 10")
   }
 
-  //if conditions with statment
-  //note that value is inscope of all if/else's 
+  //if conditions with statement
+  //note that value is inscope of all if/else's
   if 	value := 10; value < 10 {
     println(value, "Less Than 10")
   } else if value > 10{
@@ -232,7 +239,8 @@ Go doesn't have Ternary Operator ( x < 0 ? A : B ) 🤷
 
 ## Go For-Loops
 
-There are **3 forms** of for loops, also **there is no a while loop syntax in GO** (instead it is a form of for loops), also there is no do-while at all 
+There are **3 forms** of for loops, also **there is no a while loop syntax in GO** (instead it is a form of for loops), also there is no do-while at all
+
 ``` Go
   //For loop
   for j := 7; j <= 9; j++ { /*stuff*/ }
@@ -244,15 +252,19 @@ There are **3 forms** of for loops, also **there is no a while loop syntax in GO
   //Infinite Loop : While(true)
   for { /*stuff*/ if (/*stuff*/) break }
 ```
+
 ## Go For-Each loop
+
 ``` Go
 for i, v := range arr {	//do stuff }
 for _, v := range arr {	//do stuff }
 for i, _ := range arr {	//do stuff }
 ```
+
 ## Go Switch Statement
 
 Switch statements in GO doesn't require `break`; they will break by default, `fallthrough` keyword used to go to NEXT statement even if condition doesn't match, `fallthrough` is like a break so no code can be after it. however a workaround is to use `labels` and `goto`
+
 ```Go
 i := 2
 fmt.Println("Switch for i = ", i, " goes to: ")
@@ -273,10 +285,12 @@ switch i {
     fmt.Println("default")
 }
 ```
+
 ## Type Function and Returning Functions
 
 1. Functions can be assigned to variables `func0 := func() int {x++; return x}`
 2. Functions that are returned from another functions has its own scope per returned function (yea ikr ? 🤷).
+
 ``` Go
 
 package main
@@ -315,21 +329,19 @@ func wrapper() func() int {
     return x
   }
 }
-```  
-      
-      
---------------------------------------------------------------------------
-      
-            
+```
 
-# ✨Go functions and return types.
+--------------------------------------------------------------------------
+
+# ✨Go functions and return types
 
 ## Notes
 
-- Again Everything is `passed by value` except **arrays, slices, maps and channels** which some calls r**eference types**, these types are passed by reference.
+- Again Everything is `passed by value` except **arrays, slices, maps and channels** which some calls **reference types**, these types are passed by reference.
 - unlike in C, it's perfectly OK to return the address of a local variable; the storage associated with the variable survives after the function returns.
 
 ## Typical Function
+
 ``` Go
   // return void
   func add(x int, y int)  {
@@ -345,9 +357,10 @@ func wrapper() func() int {
   func add(x, y int)  int {
     return x + y
   }
-```    
+```
 
 ## Multiple Returns
+
 ```Go
   func swap(x, y string) (string, string) {
     return y, x
@@ -357,11 +370,13 @@ func wrapper() func() int {
   a, b := swap("hello", "world")
   fmt.Println(a, b) //prints "world hello"
 ```
+
 ## Named Returns
 
 You can declare return variables and name them at the beginning, they are returned in the end.
 
 *you can override the returns and return whatever you want at the return statement.
+
 ```Go
   //Returns x,y at the end.
   func split(sum int) (x, y int) {
@@ -371,9 +386,11 @@ You can declare return variables and name them at the beginning, they are return
     //return a,b  <- u can override default return of x,y.
   }
 ```
+
 ## Variadic Functions / Variable arguments list
 
 The rightmost argument can be a list of variable size (*slice*) of data.
+
 ```Go
   // x value here has no use for average. just illustrates the idea of having arguments
   // then a variable number of arguments
@@ -396,10 +413,12 @@ The rightmost argument can be a list of variable size (*slice*) of data.
     println("Average:", avg)
   }
 ```
+
 ## Type Function and Returning Functions
 
 1. Functions can be assigned to variables `func0 := func() int {x++; return x}` as anonymous functions or to another declared functions
 2. Functions that are returned from another functions has its own scope per returned function ( Closures yea ikr ? 🤷).
+
 ``` Go
 
 package main
@@ -438,10 +457,10 @@ func wrapper() func() int {
     return x
   }
 }
-```      
-      
+```
 
 ## Callbacks - Passing functions as argument
+
 ```Go
 func visit(numbers []int, callback func(int2 int)){
   for _, n := range numbers {
@@ -450,13 +469,15 @@ func visit(numbers []int, callback func(int2 int)){
 }
 func main() {
   visit([]int{1,2,3,4}, func(n int){
-    fmt.Println(n, "- Printed withing the callback function.")
+    fmt.Println(n, "- Printed within the callback function.")
   })
 }
 ```
+
 ## Defer Keyword
 
 `Defer` used before a functions executes the function at the end of the scope of it, think of it as a destructor for the scope. usually used to close opened files/buffers so u open the file and closes it using defer in the next line to keep things clean. they're executed as a **stack**.
+
 ```Go
 fmt.Println("One")
 defer fmt.Println("Four")
@@ -465,9 +486,11 @@ fmt.Println("Two")
 
 //Prints One Two Three Four
 ```
+
 ## Receivers
 
-Receiver are the way you create a method for a specific type/struct 
+Receiver are the way you create a method for a specific type/struct
+
 ``` Go
 type rect struct {
     width, height int
@@ -477,12 +500,14 @@ func (r *rect) area() int {
     return r.width * r.height
 }
 
-//used as 
+//used as
 r := rect{2,3}
 areaX := r.area()
 fmt.Println(areaX)
 ```
+
 ## Overriding Receivers
+
 ```Go
  type Person struct {
     First string
@@ -521,10 +546,7 @@ fmt.Println(x.Person.FullName()) //Sherif Abdel-Naby
 fmt.Println(x.FullName()) 		   //0ID12000ID Sherif Abdel-Naby
 ```
 
-
 --------------------------------------------------------------------------
-
-
 
 # 🏗Go Data-Structures
 
@@ -534,26 +556,31 @@ Arrays, Slices, Maps, and Structs
 
 - Arrays are of **static size**, size can't be changed in arrays.
 - Arrays elements do not need to be initialized explicitly; the zero value of the type is the initial value.
+
 ``` Go
     var x[15] int
     var twoD [2][3] int
 ```
+
 ## Slices
 
 Slices are of dynamic size.
+
 ``` GO
     letters := []string{"a", "b", "c", "d"}
-    
+
     /*  using make -> make([]T, len, cap) */
     var s []byte
     s = make([]byte, 5, 5)
     //OR
     s := make([]byte, 5)
-    
-    // both equiavlent to: s == []byte{0, 0, 0, 0, 0}
+
+    // both equivalents to: s == []byte{0, 0, 0, 0, 0}
 ```
+
 - A slice does not store any data, it just describes a section of an underlying array. Changing the elements of a slice modifies the corresponding elements of its underlying array. **Other slices that share the same underlying array will see those changes**.
 - Slicing a slice changes pointers of the underlying array, so it is as efficient as manipulating array indices, size and capacity of the new slice are changed too, capacity is equal `old capacity - sliced part from the beginning only`
+
 ```gO
     	names := [4]string{"John","Paul","George","Ringo",}
     	fmt.Println(names)   //[John Paul George Ringo]
@@ -561,18 +588,20 @@ Slices are of dynamic size.
     	b := names[1:3]
     	fmt.Println(a, b)    //[John Paul] [Paul George]
     	b[0] = "XXX"
-    	fmt.Println(a, b)    //[John XXX] [XXX George] 
+    	fmt.Println(a, b)    //[John XXX] [XXX George]
     	fmt.Println(names)   //[John XXX George Ringo]
-    
+
     	//ALSO
-    
+
     	//This is an array literal:
     	[3]bool{true, true, false}
-    
+
     	//And this creates the same array as above, then builds a slice that references it:
     	[]bool{true, true, false}
 ```
+
 ## Iterating over a Slice
+
 ``` Go
     for i, v := range arr {	//do stuff }
     for _, v := range arr {	//do stuff }
@@ -582,6 +611,7 @@ Slices are of dynamic size.
 ## Appending to Slice
 
 Append return a whole new array (not reference).
+
 ``` Go
       var s []int
     	// append works on nil slices.
@@ -589,14 +619,15 @@ Append return a whole new array (not reference).
     	// The slice grows as needed.
     	s = append(s, 1)
 ```
-Append add element at the end of the slice **if there is enough capacity** and r**eturn a reference type**!, if **not enough capacity** it allocate and copy to a new array and **return it as a new value**! and the **old array points to the old data**.
+
+Append add element at the end of the slice **if there is enough capacity** and **return a reference type**!, if **not enough capacity** it allocate and copy to a new array and **return it as a new value**! and the **old array points to the old data**.
 
 If Append had enough capacity (didn't allocate new array) then ***changing a value in the new returned array changes the value in the old***! but if it allocated a new array to expand capacity, then **changing a value at an index of the newly returned array *DOESN'T* change the old array!**
 
 consider only using append where the left hand side is the same variable in the append first argument **(S = append(S, .....) )** to avoid any unexpected results
 
 ``` Go
-  //Allocate new capacity  
+  //Allocate new capacity
   var s []int
   s = make([]int, 5, 5)
   x := append(s, 1, 2 ,3)
@@ -604,7 +635,7 @@ consider only using append where the left hand side is the same variable in the 
   s[0] = 6800
   fmt.Println(s,x) //[6800 0 0 0 0] [1337 0 0 0 0 1 2 3]
 
-  //Doesn't allocat new capacity and return reference
+  //Doesn't allocate new capacity and return reference
   var s []int
   s = make([]int, 5, 150)
   x := append(s, 1, 2 ,3)
@@ -613,31 +644,40 @@ consider only using append where the left hand side is the same variable in the 
   fmt.Println(s,x) //[6800 0 0 0 0] [6800 0 0 0 0 1 2 3]
                    //notice that 1337 is overwritten
 ```
+
 ## Common Slice Functions
 
-**Append Another Slice**
+### Append Another Slice
+
 ``` Go
   a = append(a, b...)
 ```
-**Copy**
+
+### Copy
 
 Copy only copy elements of size = min(len(a), len(b)). so, the new slice to which a copy is to be made must have a size == size of the original array to have all elements copied.
+
 ```Go
     b = make([]T, len(a))
     copy(b, a)
     // or
     b = append([]T(nil), a...)
 ```
-**Cut**
+
+### Cut
+
 ```Go
     a = append(a[:i], a[j:]...)
 ```
-**Delete**
+
+### Delete
+
 ```Go
     a = append(a[:i], a[i+1:]...)
     // or
     a = a[:i+copy(a[i:], a[i+1:])]
 ```
+
 ## Slices Tricks
 
 [golang/go](https://github.com/golang/go/wiki/SliceTricks)
@@ -645,6 +685,7 @@ Copy only copy elements of size = min(len(a), len(b)). so, the new slice to whic
 ## Maps
 
 From [https://play.golang.org/p/U67R66Oab8r](https://play.golang.org/p/U67R66Oab8r)
+
 ```Go
 // To create an empty map, use the builtin `make`:
 // `make(map[key-type]val-type)`.
@@ -692,10 +733,7 @@ n := map[string]int{"foo": 1, "bar": 2}
 fmt.Println("map:", n)
 ```
 
-
 --------------------------------------------------------------------------
-
-
 
 # 🏢Go Structs / OOP
 
@@ -759,6 +797,7 @@ func main() {
 
 }
 ```
+
 Packages might need your type to implement its interface to work, for example the `sort` package requires you to implement `swap`, `less`, `equal` methods in order to work. also `fmt.Println()` requires you to implement `func (t T) String() string`
 
 ### Polymorphism and Interfaces
@@ -825,6 +864,7 @@ func main() {
   measure(c)
 }
 ```
+
 ### Overriding
 
 ``` Go
@@ -867,10 +907,7 @@ func main() {
     fmt.Println(x.FullName()) 		 //0ID12000ID Sherif Abdel-Naby
 ```
 
-
 --------------------------------------------------------------------------
-
-
 
 # 🥂Go Concurrency
 
@@ -881,7 +918,7 @@ Go Concurrency is made available by what's called `go-routines` , basically when
 For data synchronization you can use mutex Locks, WaitGroups, and Atomic operations, however..
 **It's recommended** to use Go Channels for data synchronization, though using the sync package (using mutex, locks, atomics, and WaitGroups) is also usable if it make sense for your use case.
 
----
+--------------------------------------------------------------------------
 
 ## Notes
 
@@ -889,7 +926,7 @@ For data synchronization you can use mutex Locks, WaitGroups, and Atomic operati
 
 ## mutex Locks, WaitGroups, and Atomic operations
 
-[//TODO](//todo) Example on using synchronization by mutex Locks, WaitGroups, and Atomic operations
+TODO: Example on using synchronization by mutex Locks, WaitGroups, and Atomic operations
 
 ## Go Channels
 
@@ -900,6 +937,7 @@ GO Buffered channel add a buffer to the go channel to avoid stalls, however it i
 ### Example 1
 
 Note that I am using time.Sleep at the end to wait for the code to execute as the program will instantly close after running the two go routines.
+
 ```Go
 c := make(chan int)
 
@@ -918,10 +956,12 @@ go func() {
 
 time.Sleep(time.Second * 15)
 ```
+
 ### Example 2
 
 Using Range on a channel, it will iterate over values added on the channel until the channel is closed.
 No need to use time.sleep as the for-range is a blocking function.
+
 ```Go
 c := make(chan int)
 
@@ -937,10 +977,12 @@ for n := range c{
   fmt.Println(n)
 }
 ```
+
 ### Example 3
 
 Using wait-group to use more than 1 function to write to the same channel.
 Using a `waitGroup` to close the channel once the two writing functions signal `wg.Done()`
+
 ```Go
 c := make(chan int)
 
@@ -973,11 +1015,13 @@ for n := range c{
   fmt.Println(n)
 }
 ```
+
 ### Example 4
 
 Using dynamic number of function calls.
 
 Also notice passing i inside the go func, this is because the value outside is in a for-loop, hence it is changing, so using it inside the the go-routine will lead to unexpected results.
+
 ```Go
 c := make(chan string)
 
@@ -1005,10 +1049,12 @@ for x := range c{
   fmt.Println(x)
 }
 ```
+
 ### Example 5 - Semaphores
 
-Using only channels without waitGroup. 
+Using only channels without waitGroup.
 This is done using a channel that store bool (or anything really), and use a function to receive n-done signals then close the main channel.
+
 ```Go
 c := make(chan string)
 done := make(chan bool)
@@ -1042,10 +1088,11 @@ for x := range c{
 
 In this example we sum values from 0 to i. e.g( i = 3 → 0+1+2+3 = 6)
 
----
+--------------------------------------------------------------------------
 
 This code we create a go routine that feeds the **increment channels values** 1,2,3
 another Channel called the **sum channel** will take the **increment channel and processes its values ( so the sum channel will run until the increment channel closes )**, then the sum channel will **put its sum value for the main to pick**. the point here that main can do other stuff while sum channel finish processing. also we can pass any type of channel to sum channel to sum not necessary an incrementing values in a decoupled way.
+
 ```Go
 func main() {
 
@@ -1092,7 +1139,7 @@ func puller(c chan int) chan int  {
       fmt.Println("From Puller go-routine: Sum + i ->", sum, "+", n, "=", sum + n)
       sum += n
     }
-    fmt.Println("Summation Finished -> Outputing SUM")
+    fmt.Println("Summation Finished -> Outputting SUM")
     out <- sum
     // also we can output each sum stage for whoever uses the channel and close when finish.
     //close(out)
@@ -1100,7 +1147,8 @@ func puller(c chan int) chan int  {
   return out
 }
 ```
-```
+
+```text
 Output:
 
     From incrementer: Produced i =  0
@@ -1115,23 +1163,22 @@ Output:
     From Puller go-routine: Sum + i -> 6 + 4 = 10
     From incrementer: Produced i =  5
     From Puller go-routine: Sum + i -> 10 + 5 = 15
-    Summation Finished -> Outputing SUM
+    Summation Finished -> Outputting SUM
     Final Sum 15
 ```
 
-
 --------------------------------------------------------------------------
-
-
 
 # 🐞Go Error Handling
 
 ## Notes
+
 Go doesn't use try/catch and exceptions to handle errors, instead, functions also returns an error along with its own return. programmer should then check this error by an if-condition and deiced what to do accordingly
 
 ## Example
 
 from "Go by Example"...
+
 ```Go
 // In Go it's idiomatic to communicate errors via an
 // explicit, separate return value. This contrasts with
