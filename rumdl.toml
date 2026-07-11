@@ -1,0 +1,17 @@
+# rumdl config — https://github.com/rvben/rumdl (markdownlint-compatible)
+# Tune Markdown rules here. The default rule set is the full markdownlint suite.
+
+[global]
+# Don't write a .rumdl_cache/ dir (hk only lints staged files).
+cache = false
+disable = [
+  "MD013", # line length — noisy on study-notes prose
+  "MD024", # duplicate headings — intentional section repeats (e.g. "Notes")
+  "MD025", # multiple top-level headings — notes are sectioned by H1
+  "MD033", # inline HTML — occasional emoji/HTML in headings
+  "MD041", # first-line H1 — not required for every markdown file
+]
+
+# Table formatting (MD060) is OFF by default. Uncomment to pad table cells:
+# [MD060]
+# style = "aligned"

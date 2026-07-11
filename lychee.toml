@@ -1,0 +1,7 @@
+# lychee config — https://github.com/lycheeverse/lychee
+# Offline mode: resolve local/relative links only; http(s) links show as excluded,
+# not checked. Flip `offline = false` (and confirm) to also check online links.
+offline = true
+
+# Don't use `exclude_path` to scope inputs — it's regex-matched against the whole
+# path and can silently drop subtrees. hk already passes the right file list.

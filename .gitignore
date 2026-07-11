@@ -1,0 +1,12 @@
+# mise local overrides (not shared)
+mise.local.toml
+mise.local.lock
+
+# OS
+.DS_Store
+._*
+
+# IDE
+.idea/
+.vscode/
+*.sw?

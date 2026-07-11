@@ -1,0 +1,18 @@
+# betterleaks config — https://github.com/betterleaks/betterleaks
+# gitleaks-compatible secret scanner. Keep the built-in rules; add allowlist entries
+# below for confirmed false positives (example keys, test fixtures) instead of disabling.
+
+[extend]
+useDefault = true
+
+[allowlist]
+# paths = [
+#   '''testdata/.*''',
+# ]
+# regexes = [
+#   '''EXAMPLE_[A-Z0-9]+''',
+# ]
+# stopwords = [
+#   "example",
+#   "sample",
+# ]

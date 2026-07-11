@@ -1,0 +1,21 @@
+# typos config — https://github.com/crate-ci/typos
+# Silence project-specific false positives here rather than disabling the step.
+
+[files]
+# Paths typos should never look at (vendored / generated).
+extend-exclude = [
+  # e.g. "vendor/",
+]
+
+[default.extend-words]
+# Whole words to treat as correct, e.g.:
+# alot = "alot"
+Sherif = "Sherif" # the author's name; not a typo of "Sheriff"
+
+[default.extend-identifiers]
+# Code identifiers to treat as correct, e.g.:
+# inout = "inout"
+
+[default]
+# Regexes whose matches are ignored entirely, e.g.:
+# extend-ignore-re = ["(?i)\\bfoobar\\b"]

@@ -1,0 +1,10 @@
+# yamllint config — https://github.com/adrienverge/yamllint
+# Keep structural rules (syntax, duplicate keys, indentation); drop cosmetic ones.
+extends: default
+rules:
+  line-length: disable
+  truthy: disable
+  comments: disable
+  comments-indentation: disable
+  document-start: disable
+  # keep structural: key-duplicates, indentation, syntax, anchors

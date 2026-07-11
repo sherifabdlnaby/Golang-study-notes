@@ -1,0 +1,81 @@
+// hk.pkl — git hooks for hk. See https://hk.jdx.dev.
+// Pin must match `hk` in mise.toml; regenerate URLs with `hk init` after a bump.
+amends "package://github.com/jdx/hk/releases/download/v1.48.0/hk@1.48.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.48.0/hk@1.48.0#/Builtins.pkl"
+
+// Repo-wide ignores — committed paths only (.gitignore is already honored).
+local commonIgnores = List(
+  "**/vendor/**",
+  "**/*.min.*",
+)
+
+// Linters defined once, shared by the hooks below.
+local linters: Mapping<String, Step> = new Mapping<String, Step> {
+  // Go
+  ["go_fmt"] = Builtins.go_fmt
+
+  // Generic file hygiene
+  ["newlines"] = Builtins.newlines
+  ["trailing_whitespace"] = Builtins.trailing_whitespace
+  ["mixed_line_ending"] = Builtins.mixed_line_ending
+  ["byte_order_marker"] = Builtins.byte_order_marker
+  ["check_added_large_files"] = Builtins.check_added_large_files
+  ["check_executables_have_shebangs"] = Builtins.check_executables_have_shebangs
+  ["check_case_conflict"] = Builtins.check_case_conflict
+  ["check_merge_conflict"] = Builtins.check_merge_conflict
+  ["check_symlinks"] = Builtins.check_symlinks
+  ["detect_private_key"] = Builtins.detect_private_key
+
+  // Config-file formats
+  ["mise"] = Builtins.mise
+  ["taplo"] = Builtins.taplo
+  ["yamllint"] = Builtins.yamllint
+
+  // GitHub Actions
+  ["actionlint"] = Builtins.actionlint
+  ["zizmor"] = Builtins.zizmor
+  // pinact needs a token to resolve Action tags → SHAs. Prefer $GITHUB_TOKEN (CI);
+  // locally fall back to `gh auth token`. Empty token = unauthenticated (rate-limited),
+  // not a hard fail. hk env is static, so prepend onto the builtin's own command.
+  ["pinact"] = (Builtins.pinact) {
+    check_diff =
+      "PINACT_GITHUB_TOKEN=\"${GITHUB_TOKEN:-$(gh auth token 2>/dev/null || true)}\" "
+        + Builtins.pinact.check_diff
+    fix =
+      "PINACT_GITHUB_TOKEN=\"${GITHUB_TOKEN:-$(gh auth token 2>/dev/null || true)}\" "
+        + Builtins.pinact.fix
+  }
+
+  // Secrets & spelling
+  ["betterleaks"] = Builtins.betterleaks
+  ["typos"] = Builtins.typos
+
+  // Docs / links
+  ["lychee"] = Builtins.lychee
+  ["rumdl"] = Builtins.rumdl
+}
+
+exclude = commonIgnores
+
+hooks {
+  // `hk check` / `mise run check` — CI + manual lint (read-only; `--fix` applies).
+  ["check"] {
+    steps = linters
+  }
+
+  // `git commit` (staged) — fix inline; stash guards unstaged hunks.
+  ["pre-commit"] {
+    fix = true
+    stash = "git"
+    steps = linters
+  }
+
+  // Keep slow gates off until the tree is clean (see stacked lint-fixes PR).
+  ["pre-push"] {
+    steps {}
+  }
+
+  ["commit-msg"] {
+    steps {}
+  }
+}
